@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import './App.css';
+import GlobalStyles from './assets/styles/globalStyles';
 
 const Home = lazy(() => import('./pages/home/home'));
 const SearchResults = lazy(() => import('./pages/search-results/search-results'));
@@ -15,6 +15,7 @@ const Profile = lazy(() => import('./pages/profile/profile'));
 function App() {
   return (
     <Router>
+      <GlobalStyles />
       <header>
         <h1>Script Supply</h1>
         <nav>
