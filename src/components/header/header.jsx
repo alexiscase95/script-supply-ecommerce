@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import SearchBar from '../search-bar/search-bar';
 import {headerStyle, logoStyle, logoTextStyle, searchBarStyle, iconsStyle, iconStyle} from "./header-styles";
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Header component to display a text logo, search bar, and user/cart icons.
@@ -8,6 +9,13 @@ import {headerStyle, logoStyle, logoTextStyle, searchBarStyle, iconsStyle, iconS
  * @returns {JSX.Element} The rendered Header component.
  */
 const Header = () => {
+    const navigate = useNavigate();
+
+    const searchQuery = (query) => {
+        if (query.trim()) {
+            navigate(`/search-results?query=${encodeURIComponent(query)}`); 
+          }
+    }
 
   return (
     <header css={headerStyle}>
@@ -20,7 +28,7 @@ const Header = () => {
           roundedCorners={true} 
           showButton={true} 
           showDropdown={true} 
-          onSearch={(query) => console.log(query)} // TODO add search handler
+          onSearch={searchQuery} // TODO add search handler
         />
       </div>
       <div css={iconsStyle}>

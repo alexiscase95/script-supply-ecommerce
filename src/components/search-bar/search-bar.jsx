@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
 import { containerStyle, inputStyle, buttonStyle, dropdownStyle, dropdownItemStyle} from "./search-bar-styles";
+import { useRef, useEffect } from 'react';
 
 /**
  * SearchBar component to provide a reusable search input with optional features.
@@ -23,14 +24,17 @@ const SearchBar = ({
   showDropdown = false, 
   onSearch = () => {} 
 }) => {
-  const [query, setQuery] = useState('');
-  const [dropdownOptions, setDropdownOptions] = useState([]);
+    const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const containerRef = useRef(null);
+    const [query, setQuery] = useState('');
+    const [dropdownOptions, setDropdownOptions] = useState([]);
 
   // Handle input change and dropdown suggestions
   const handleChange = (e) => {
     const value = e.target.value;
     setQuery(value);
-    if (showDropdown) {
+    setDropdownOpen(true);
+    if (showDropdown && isDropdownOpen) {
       // Simulate fetching dropdown suggestions based on query 
       //TODO: Add functionality to suggestions based on list of products
       setDropdownOptions(value ? [`Suggestion 1 for "${value}"`, `Suggestion 2 for "${value}"`] : []);
@@ -39,6 +43,9 @@ const SearchBar = ({
 
   const handleSearch = () => {
     onSearch(query);
+    setQuery('');
+    setDropdownOptions("");
+    setDropdownOpen(false);
   };
 
   const handleKeyDown = (e) => {
@@ -47,8 +54,25 @@ const SearchBar = ({
     }
   };
 
+  const handleDropdownClick = (option) => {
+    handleSearch(option);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div css={containerStyle}>
+    <div css={containerStyle} ref={containerRef}>
       <div>
         <input 
           type="text" 
@@ -58,10 +82,14 @@ const SearchBar = ({
           onKeyDown={handleKeyDown}
           css={inputStyle} 
         />
-        {showDropdown && dropdownOptions.length > 0 && (
+        {isDropdownOpen && showDropdown && dropdownOptions.length > 0 && (
           <div css={dropdownStyle(roundedCorners)}>
             {dropdownOptions.map((option, index) => (
-              <div key={index} css={dropdownItemStyle}>
+              <div
+                key={index}
+                css={dropdownItemStyle}
+                onClick={() => handleDropdownClick(option)} 
+              >
                 {option}
               </div>
             ))}
