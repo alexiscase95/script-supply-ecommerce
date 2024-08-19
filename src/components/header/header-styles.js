@@ -11,6 +11,9 @@ export const headerStyle = css`
 export const logoStyle = css`
     flex: 1;
     display: flex;
+    text-decoration: none; 
+    color: inherit; 
+    cursor: pointer;
   `;
 
 export const logoTextStyle = css`

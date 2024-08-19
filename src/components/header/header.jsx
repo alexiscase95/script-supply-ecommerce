@@ -2,6 +2,7 @@
 import SearchBar from '../search-bar/search-bar';
 import {headerStyle, logoStyle, logoTextStyle, searchBarStyle, iconsStyle, iconStyle} from "./header-styles";
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 /**
  * Header component to display a text logo, search bar, and user/cart icons.
@@ -19,9 +20,9 @@ const Header = () => {
 
   return (
     <header css={headerStyle}>
-      <div css={logoStyle}>
+        <Link to="/home" css={logoStyle}>
         <span css={logoTextStyle}>Script Supply</span>
-      </div>
+      </Link>
       <div css={searchBarStyle}>
         <SearchBar 
           placeholder="Search for products..." 
