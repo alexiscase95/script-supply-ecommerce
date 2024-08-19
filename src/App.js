@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import GlobalStyles from './assets/styles/globalStyles';
+import Header from './components/header/header';
 
 const Home = lazy(() => import('./pages/home/home'));
 const SearchResults = lazy(() => import('./pages/search-results/search-results'));
@@ -16,22 +17,7 @@ function App() {
   return (
     <Router>
       <GlobalStyles />
-      <header>
-        <h1>Script Supply</h1>
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/search-results">Search Results</Link></li>
-            <li><Link to="/product-listing">Product Listing</Link></li>
-            <li><Link to="/product-details">Product Details</Link></li>
-            <li><Link to="/cart">Cart</Link></li>
-            <li><Link to="/checkout">Checkout</Link></li>
-            <li><Link to="/order-confirmation">Order Confirmation</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/profile">Profile</Link></li>
-          </ul>
-        </nav>
-      </header>
+      <Header />
       <main>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
@@ -48,6 +34,17 @@ function App() {
         </Suspense>
       </main>
       <footer>
+      <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/search-results">Search Results</Link></li>
+            <li><Link to="/product-listing">Product Listing</Link></li>
+            <li><Link to="/product-details">Product Details</Link></li>
+            <li><Link to="/cart">Cart</Link></li>
+            <li><Link to="/checkout">Checkout</Link></li>
+            <li><Link to="/order-confirmation">Order Confirmation</Link></li>
+            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/profile">Profile</Link></li>
+          </ul>
         <p>&copy; 2024 Script Supply</p>
       </footer>
     </Router>
