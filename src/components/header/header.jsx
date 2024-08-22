@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <header css={headerStyle}>
-        <Link to="/home" css={logoStyle}>
+        <Link to="/" css={logoStyle}>
         <span css={logoTextStyle}>Script Supply</span>
       </Link>
       <div css={searchBarStyle}>

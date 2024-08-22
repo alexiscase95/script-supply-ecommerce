@@ -35,8 +35,6 @@ function App() {
       </main>
       <footer>
       <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/search-results">Search Results</Link></li>
             <li><Link to="/product-listing">Product Listing</Link></li>
             <li><Link to="/product-details">Product Details</Link></li>
             <li><Link to="/cart">Cart</Link></li>
